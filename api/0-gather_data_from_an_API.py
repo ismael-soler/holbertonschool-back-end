@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-
-
+""" using this REST API, for a given employee ID, returns information
+about his/her TODO list progress. """
 import requests
 import sys
 
@@ -15,12 +15,16 @@ def gatherDataFromEmployee():
         exit()
 
     employeeData = requests.get(
-        'https://jsonplaceholder.typicode.com/users?id={}'.format(idInput)).json()[0]
+        'https://jsonplaceholder.typicode.com/users?id={}'.format(
+            idInput)).json()[0]
     employeeToDoList = requests.get(
-        'https://jsonplaceholder.typicode.com/users/{}/todos'.format(idInput)).json()
+        'https://jsonplaceholder.typicode.com/users/{}/todos'.format(
+            idInput)).json()
 
-    # Iterating through the list of tasks and checking if the task is completed. If it is, it adds the
-    # title of the task to the list of completed tasks and increments the number of completed tasks.
+    # Iterating through the list of tasks and checking if the task is completed
+    # If it is, it adds the
+    # title of the task to the list of completed tasks and increments the numbe
+    # of completed tasks.
     doneTasksTitles = [task["title"]
                        for task in employeeToDoList if task["completed"]]
 
